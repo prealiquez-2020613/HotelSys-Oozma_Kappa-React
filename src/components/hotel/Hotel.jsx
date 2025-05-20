@@ -15,9 +15,8 @@ export const HotelsList = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold">Descubre Hoteles</h2>
-
+      <div className="flex items-center mb-6 space-x-4">
+        <h2 className="text-3xl font-bold whitespace-nowrap">Descubre Hoteles</h2>
         <select
           className="border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={selectedCategory}
@@ -35,7 +34,7 @@ export const HotelsList = () => {
       {filteredHotels.length === 0 ? (
         <div>No se encontraron hoteles con ese filtro.</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filteredHotels.map(hotel => (
             <HotelCard
               key={hotel._id}
