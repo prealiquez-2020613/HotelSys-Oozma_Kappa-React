@@ -24,3 +24,12 @@ export const loginRequest = async(user)=>{
     return {error : true, err}
   }
 }
+
+//RUTA HOTEL
+export const getHotelsRequest = async()=>{
+  try {
+    return await apiClient.get('/v1/hotel/getAllHotels')
+  } catch (err) {
+    return {error : true, err}
+  }
+}
