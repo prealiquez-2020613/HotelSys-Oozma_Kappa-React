@@ -33,3 +33,11 @@ export const getHotelsRequest = async()=>{
     return {error : true, err}
   }
 }
+
+export const findHotelRequest = async(hotelId)=>{
+  try {
+    return await apiClient.get(`/v1/hotel/getHotel/${hotelId}`)
+  } catch (err) {
+    return {error : true, err}
+  }
+}
