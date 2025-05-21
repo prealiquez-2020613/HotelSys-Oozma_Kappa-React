@@ -23,9 +23,9 @@ export const HotelInfo = () => {
     fetchHotel()
   }, [hotelId])
 
-  if (loading) return <div>Cargando hotel...</div>
-  if (error) return <div>{error}</div>
-  if (!hotel) return <div>Hotel no encontrado</div>
+  if (loading) return <div className="pt-24 text-center">Cargando hotel...</div>
+  if (error) return <div className="pt-24 text-center">{error}</div>
+  if (!hotel) return <div className="pt-24 text-center">Hotel no encontrado</div>
 
   const starsCount = (() => {
     switch (hotel.category) {
@@ -39,30 +39,30 @@ export const HotelInfo = () => {
   })()
 
   return (
-    <div className="flex max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md space-x-8">
+    <div className="flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto pt-24 px-16 space-y-8 md:space-y-0 md:space-x-14">
       <img
         src={hotel.imageUrl}
         alt={`Imagen de ${hotel.name}`}
-        className="w-80 h-80 object-cover rounded-lg"
+        className="w-full md:w-[500px] h-100 object-cover rounded-md"
       />
 
-      <div className="flex flex-col justify-center">
-        <h2 className="text-4xl font-bold">{hotel.name}</h2>
+      <div className="flex flex-col justify-center max-w-4xl text-justify">
+        <h2 className="text-5xl font-bold leading-tight">{hotel.name}</h2>
 
-        <div className="flex items-center mt-1 mb-4 text-gray-700 font-semibold text-lg">
-          <span className="mr-2 text-yellow-500">⭐</span>
+        <div className="flex items-center mt-2 mb-6 text-gray-700 font-semibold text-xl">
+          <span className="mr-3 text-yellow-500 text-2xl">⭐</span>
           <span>{starsCount} Estrella{starsCount > 1 ? 's' : ''}</span>
         </div>
 
-        <p className="text-gray-800 mb-6 max-w-xl">
+        <p className="text-gray-900 text-lg leading-relaxed mb-8">
           <strong>Descripción: </strong> {hotel.description}
         </p>
 
-        <div className="flex items-center text-lg font-bold">
+        <div className="flex items-center text-xl font-bold mb-1">
           <span>Ubicación</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="ml-2 h-6 w-6"
+            className="ml-2 h-7 w-7"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -73,7 +73,7 @@ export const HotelInfo = () => {
           </svg>
         </div>
 
-        <p className="text-gray-800 max-w-xl mt-1">{hotel.address}</p>
+        <p className="text-gray-900 text-lg max-w-3xl">{hotel.address}</p>
       </div>
     </div>
   )
