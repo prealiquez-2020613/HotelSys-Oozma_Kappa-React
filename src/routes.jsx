@@ -4,5 +4,6 @@ import { HotelPage } from "./pages/hotel/HotelPage"
 
 export const routes = [
     {path:'/',element:<HotelPage/>},
-    {path:'/register',element:<RegisterPage/>}
+    {path:'/register',element:<RegisterPage/>},
+    {path:'/login',element:<LoginPage/>}
 ]
