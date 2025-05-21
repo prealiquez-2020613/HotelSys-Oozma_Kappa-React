@@ -77,6 +77,7 @@ export const HotelsList = () => {
           {filteredHotels.map(hotel => (
             <HotelCard
               key={hotel._id}
+              _id={hotel._id}
               name={hotel.name}
               address={hotel.address}
               imageUrl={hotel.imageUrl}
