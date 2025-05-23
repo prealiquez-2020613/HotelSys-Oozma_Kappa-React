@@ -1,41 +1,44 @@
 import { useState } from 'react'
-import {useRegister} from '../shared/hooks/useRegister.jsx'
+import { useRegister } from '../shared/hooks/useRegister.jsx'
 import { Link } from 'react-router-dom'
+import { UserPlus } from 'lucide-react'
 
 export const Register = () => {
-
-  
-  const background = "https://cdn.pixabay.com/photo/2022/04/26/13/14/background-7158357_1280.jpg"
-
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [phone, setPhone] = useState("")
-  const {register} = useRegister()
+  const { register } = useRegister()
 
-  const [checkValidation, setCheckValidation] = useState(
-    {name: undefined, surname: undefined, username: undefined, email: email, password: undefined, phone: undefined}
-  )
+  const [checkValidation, setCheckValidation] = useState({
+    name: undefined,
+    surname: undefined,
+    username: undefined,
+    email: undefined,
+    password: undefined,
+    phone: undefined,
+  })
 
-  const disabledButton = checkValidation.name === "" &&
-                          checkValidation.surname === "" &&
-                          checkValidation.username === "" &&
-                          checkValidation.email === "" &&
-                          checkValidation.password === "" &&
-                          checkValidation.phone === ""
+  const disabledButton =
+    checkValidation.name === "" &&
+    checkValidation.surname === "" &&
+    checkValidation.username === "" &&
+    checkValidation.email === "" &&
+    checkValidation.password === "" &&
+    checkValidation.phone === ""
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    register(name,surname,username,email,password,phone)
+    register(name, surname, username, email, password, phone)
   }
 
   const handleNameChange = (e) => {
     const value = e.target.value
     setCheckValidation({
       ...checkValidation,
-      name : value.length > 0 ? "" : 'Name field cannot be empty'
+      name: value.length > 0 ? "" : 'Name field cannot be empty',
     })
     setName(value)
   }
@@ -44,7 +47,7 @@ export const Register = () => {
     const value = e.target.value
     setCheckValidation({
       ...checkValidation,
-      surname : value.length > 0 ? "" : 'Surname field cannot be empty'
+      surname: value.length > 0 ? "" : 'Surname field cannot be empty',
     })
     setSurname(value)
   }
@@ -53,7 +56,7 @@ export const Register = () => {
     const value = e.target.value
     setCheckValidation({
       ...checkValidation,
-      username : value.length > 0 ? "" : 'Username field cannot be empty'
+      username: value.length > 0 ? "" : 'Username field cannot be empty',
     })
     setUsername(value)
   }
@@ -62,7 +65,7 @@ export const Register = () => {
     const value = e.target.value
     setCheckValidation({
       ...checkValidation,
-      email : /\S+@\S+\.\S+/.test(value) ? "" : 'Email is not valid'
+      email: /\S+@\S+\.\S+/.test(value) ? "" : 'Email is not valid',
     })
     setEmail(value)
   }
@@ -71,7 +74,9 @@ export const Register = () => {
     const value = e.target.value
     setCheckValidation({
       ...checkValidation,
-      password : /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/.test(value) ? "" : 'Password must be between 8 and 16 characters, at least one digit, at least one lower case letter, at least one upper case letter and at least one non-alphanumeric character.'
+      password: /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/.test(value)
+        ? ""
+        : 'Password must be 8-16 chars, with digit, upper, lower and special char.',
     })
     setPassword(value)
   }
@@ -80,108 +85,144 @@ export const Register = () => {
     const value = e.target.value
     setCheckValidation({
       ...checkValidation,
-      phone : value.length >= 8 ? "" : 'Phone needs to be over 8 digits'
+      phone: value.length >= 8 ? "" : 'Phone needs to be over 8 digits',
     })
     setPhone(value)
   }
 
   return (
-    <div
-      className="bg-cover bg-center h-screen flex items-center justify-center"
-      style={{ backgroundImage: "url('https://cdn.pixabay.com/photo/2022/04/26/13/14/background-7158357_1280.jpg')" }}
-    >
-      <div className="w-full max-w-sm bg-white/30 backdrop-blur-md rounded-2xl shadow-lg p-8">
-        <h1 className="text-center text-3xl text-black font-bold pb-2 mb-5">
+    <div className="min-h-screen bg-blue-50 flex items-center justify-center px-6 py-12">
+      <div className="max-w-md w-full bg-white p-10 rounded-2xl shadow-xl border border-blue-200">
+        <div className="flex justify-center mb-6">
+          <UserPlus className="h-10 w-10 text-blue-600" />
+        </div>
+        <h1 className="text-3xl font-serif font-bold text-blue-800 mb-6 text-center">
           REGISTRO
         </h1>
 
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
+        <form onSubmit={handleSubmit} className="space-y-6">
 
-          <span className="text-center text-red-700 font-bold">{checkValidation.name}</span>
+          <div>
             <input
               id="name"
-              type="name"
+              type="text"
               placeholder="Name"
-              className="w-full px-4 py-3 rounded-lg bg-transparent border border-white text-black placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+              className={`w-full px-4 py-3 rounded-lg border ${
+                checkValidation.name ? 'border-red-600' : 'border-blue-300'
+              } text-blue-900 placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition`}
               value={name}
               onChange={handleNameChange}
+              autoComplete="given-name"
             />
+            {checkValidation.name && (
+              <p className="mt-1 text-sm text-red-600 font-semibold">{checkValidation.name}</p>
+            )}
           </div>
 
-          <span className="text-center text-red-700 font-bold">{checkValidation.surname}</span>
           <div>
             <input
               id="surname"
-              type="surname"
+              type="text"
               placeholder="Surname"
-              className="w-full px-4 py-3 rounded-lg bg-transparent border border-white text-black placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+              className={`w-full px-4 py-3 rounded-lg border ${
+                checkValidation.surname ? 'border-red-600' : 'border-blue-300'
+              } text-blue-900 placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition`}
               value={surname}
               onChange={handleSurnameChange}
+              autoComplete="family-name"
             />
+            {checkValidation.surname && (
+              <p className="mt-1 text-sm text-red-600 font-semibold">{checkValidation.surname}</p>
+            )}
           </div>
 
-          <span className="text-center text-red-700 font-bold">{checkValidation.username}</span>
           <div>
             <input
               id="username"
-              type="username"
+              type="text"
               placeholder="Username"
-              className="w-full px-4 py-3 rounded-lg bg-transparent border border-white text-black placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+              className={`w-full px-4 py-3 rounded-lg border ${
+                checkValidation.username ? 'border-red-600' : 'border-blue-300'
+              } text-blue-900 placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition`}
               value={username}
               onChange={handleUsernameChange}
+              autoComplete="username"
             />
+            {checkValidation.username && (
+              <p className="mt-1 text-sm text-red-600 font-semibold">{checkValidation.username}</p>
+            )}
           </div>
 
-          <span className="text-center text-red-700 font-bold">{checkValidation.email}</span>
           <div>
             <input
               id="email"
               type="email"
               placeholder="Email"
-              className="w-full px-4 py-3 rounded-lg bg-transparent border border-white text-black placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+              className={`w-full px-4 py-3 rounded-lg border ${
+                checkValidation.email ? 'border-red-600' : 'border-blue-300'
+              } text-blue-900 placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition`}
               value={email}
               onChange={handleEmailChange}
+              autoComplete="email"
             />
+            {checkValidation.email && (
+              <p className="mt-1 text-sm text-red-600 font-semibold">{checkValidation.email}</p>
+            )}
           </div>
 
-          <span className="text-center text-red-700 font-bold">{checkValidation.password}</span>
           <div>
             <input
               id="password"
               type="password"
               placeholder="Contraseña"
-              className="w-full px-4 py-3 rounded-lg bg-transparent border border-white text-black placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+              className={`w-full px-4 py-3 rounded-lg border ${
+                checkValidation.password ? 'border-red-600' : 'border-blue-300'
+              } text-blue-900 placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition`}
               value={password}
               onChange={handlePasswordChange}
+              autoComplete="new-password"
             />
+            {checkValidation.password && (
+              <p className="mt-1 text-sm text-red-600 font-semibold">{checkValidation.password}</p>
+            )}
           </div>
 
-          <span className="text-center text-red-700 font-bold">{checkValidation.phone}</span>
           <div>
             <input
               id="phone"
-              type="phone"
-              placeholder="phone"
-              className="w-full px-4 py-3 rounded-lg bg-transparent border border-white text-black placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+              type="tel"
+              placeholder="Phone"
+              className={`w-full px-4 py-3 rounded-lg border ${
+                checkValidation.phone ? 'border-red-600' : 'border-blue-300'
+              } text-blue-900 placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition`}
               value={phone}
               onChange={handlePhoneChange}
+              autoComplete="tel"
             />
+            {checkValidation.phone && (
+              <p className="mt-1 text-sm text-red-600 font-semibold">{checkValidation.phone}</p>
+            )}
           </div>
-          
+
           <button
             disabled={!disabledButton}
-            className="w-full px-4 py-3 rounded-lg bg-blue-900 text-white font-bold shadow-md hover:bg-blue-700 focus:outline-none"
+            type="submit"
+            className={`w-full px-4 py-3 rounded-lg font-medium text-white shadow-md transition-colors ${
+              disabledButton
+                ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
+                : 'bg-blue-300 cursor-not-allowed'
+            }`}
           >
             Register
           </button>
         </form>
 
-        <p className=" mt-4 text-center text-white">
-          Already have an account? 
-          <Link className=" text-blue-600" to="/"> Sign In</Link>
+        <p className="mt-6 text-center text-blue-700">
+          Already have an account?{' '}
+          <Link to="/" className="text-blue-600 font-semibold hover:underline">
+            Sign In
+          </Link>
         </p>
-
       </div>
     </div>
   )

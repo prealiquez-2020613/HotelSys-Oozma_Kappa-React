@@ -5,24 +5,24 @@ export const Navbar = () => {
   const userIconUrl = 'https://cdn-icons-png.freepik.com/512/9307/9307950.png'
 
   return (
-    <nav className="bg-white shadow-md px-6 py-3 flex justify-between items-center">
+    <nav className="bg-blue-950 shadow-md px-6 py-3 flex justify-between items-center">
 
       <div className="flex space-x-8">
         <Link
           to="/"
-          className="text-gray-700 hover:text-blue-600 font-semibold"
+          className="text-white hover:text-blue-600 font-semibold"
         >
           Inicio
         </Link>
         <Link
           to="/reservation"
-          className="text-gray-700 hover:text-blue-600 font-semibold"
+          className="text-white hover:text-blue-600 font-semibold"
         >
           Reservación
         </Link>
         <Link
           to="/hotels"
-          className="text-gray-700 hover:text-blue-600 font-semibold"
+          className="text-white hover:text-blue-600 font-semibold"
         >
           Gestionar Hoteles
         </Link>

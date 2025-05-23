@@ -1,37 +1,37 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import toast from 'react-hot-toast'
 import { loginRequest } from "../../services/api.js"
 
 export const useLogin = () => {
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(false)
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
 
-    const login = async (username, password) => {
-        setIsLoading(true)
+  const login = async (username, password) => {
+    setIsLoading(true)
 
-        const user = {username, password}
+    const user = { username, password }
 
-        const response = await loginRequest(user)
-        setIsLoading(false)
+    const response = await loginRequest(user)
+    setIsLoading(false)
 
-        if (response.error){
-          setError(true)
-
-          if(response?.err?.response?.data?.errors){
-            let arrayErrors = response?.err?.response?.data?.errors
-            for (const error of arrayErrors) {
-              return toast.error(error.msg)
-            }
-          }
-
-          return toast.error(
-              response?.err?.response?.data || response?.err?.data?.msg || 'General error trying to log in'
-          )
-        }
-
-        toast.success('Login succesfully')
+    if (response.error) {
+      return toast.error(response.message)
     }
+
+    const { loggedUser, message, token } = response.data
+    console.log(response.data);
+    localStorage.setItem('token', token)
+    localStorage.setItem('user', JSON.stringify(loggedUser))
+
+
+    if (token) {
+      navigate('/')
+      return toast.success(message)
+    }
+    localStorage.setItem('token', response.data.token)
+  }
 
   return {
     login, isLoading
