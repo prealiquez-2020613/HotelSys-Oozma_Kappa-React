@@ -112,6 +112,15 @@ export const reservationRequest = async (user) => {
   }
 }
 
+//getUserReservation
+export const getUserReservation = async () => {
+  try {
+    return await apiClient.get('/V1/Reservation/getUserReservations')
+  } catch (err) {
+    return { error: true, err }
+  }
+}
+
 //RUTA ROOMS
 
 //getByHotel
