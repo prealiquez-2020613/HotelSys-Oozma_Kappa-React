@@ -72,3 +72,12 @@ export const updateHotel = async(id, hotelData)=>{
     return {error: true, err}
   }
 }
+
+//delete
+export const deleteHotel = async(id)=>{
+  try {
+    return await apiClient.delete(`/v1/hotel/deleteHotel/${id}`)
+  } catch (err) {
+    return {error: true, err}
+  }
+}
