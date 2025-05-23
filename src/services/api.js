@@ -100,3 +100,14 @@ export const deleteHotel = async(id)=>{
     return {error: true, err}
   }
 }
+
+//RUTA RESERVATION
+
+//create
+export const reservationRequest = async (user) => {
+  try {
+    return await apiClient.post('/V1/Reservation/createReservation', user, { type: 'multipart/form-data' })
+  } catch (err) {
+    return { error: true, err }
+  }
+}
