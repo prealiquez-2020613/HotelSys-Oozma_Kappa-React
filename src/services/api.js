@@ -28,11 +28,19 @@ export const registerRequest = async(user)=>{
 }
 
 //RUTA LOGIN
-export const loginRequest = async(user)=>{
+export const loginRequest = async (user) => {
   try {
-    return await apiClient.post('/login', user, {type: 'multipart/form-data'})
+    const res = await apiClient.post('/login', user)
+    console.log(res);
+
+    return { error: false, data: res.data }
   } catch (err) {
-    return {error : true, err}
+    return {
+      error: true,
+      status: err.response?.status,
+      message: err.response?.data?.message || 'Error inesperado',
+      err
+    }
   }
 }
 
