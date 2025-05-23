@@ -6,43 +6,43 @@ import { useDeleteHotel } from '../shared/hooks/Hotel/useDeleteHotel';
 import toast from 'react-hot-toast';
 
 export const HotelForm = () => {
-  // Hooks para llamadas al backend
   const { getHotels, hotels, setHotels } = useGetHotels();
   const { setHotel } = useAddHotel();
   const { updateHotel } = useUpdateHotel();
   const { deleteHotelHook } = useDeleteHotel();
 
-  // Estados locales
-  const [form, setForm] = useState({ name: '', address: '', category: '', amenities: '' });
+  const [form, setForm] = useState({
+    name: '',
+    address: '',
+    category: '',
+    description: '',
+    imageUrl: '',
+  });
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Validaciones de errores individuales
   const [errors, setErrors] = useState({});
 
-  // Cargar hoteles en el montaje
   useEffect(() => {
     getHotels();
   }, []);
 
-  // Manejo de cambios en inputs
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    setErrors(prev => ({ ...prev, [e.target.name]: '' })); // limpiar error al modificar campo
+    setErrors(prev => ({ ...prev, [e.target.name]: '' }));
   };
 
-  // Validación de formulario mostrando errores inline
   const validateForm = () => {
     const newErrors = {};
     if (!form.name.trim()) newErrors.name = 'El nombre es obligatorio';
     if (!form.address.trim()) newErrors.address = 'La dirección es obligatoria';
     if (!form.category.trim()) newErrors.category = 'La categoría es obligatoria';
-    if (!form.amenities.trim()) newErrors.amenities = 'Los servicios son obligatorios';
+    if (!form.description.trim()) newErrors.description = 'La descripción es obligatoria';
+    if (!form.imageUrl.trim()) newErrors.imageUrl = 'La URL de la imagen es obligatoria';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // Crear o actualizar hotel
   const handleSubmit = async () => {
     if (!validateForm()) {
       return;
@@ -52,27 +52,24 @@ export const HotelForm = () => {
 
     const payload = {
       ...form,
-      amenities: form.amenities.split(',').map(a => a.trim()).filter(a => a),
+      category: form.category.toUpperCase(),
     };
 
     try {
       if (editingId) {
-        // Actualizar hotel
         const res = await updateHotel(editingId, payload);
         if (!res.error) {
-          await getHotels(); // refresca lista completa
+          await getHotels();
           resetForm();
           toast.success('Hotel actualizado!');
         } else {
           toast.error('Error al actualizar hotel');
         }
       } else {
-        // Crear hotel
         const res = await setHotel(payload);
         if (!res.error) {
           await getHotels();
           resetForm();
-          // Toast success lo maneja el hook
         }
       }
     } catch (error) {
@@ -83,19 +80,18 @@ export const HotelForm = () => {
     }
   };
 
-  // Establecer datos para editar
   const handleEdit = (hotel) => {
     setForm({
       name: hotel.name || '',
       address: hotel.address || '',
       category: hotel.category || '',
-      amenities: Array.isArray(hotel.amenities) ? hotel.amenities.join(', ') : '',
+      description: hotel.description || '',
+      imageUrl: hotel.imageUrl || '',
     });
     setEditingId(hotel._id);
     setErrors({});
   };
 
-  // Eliminar hotel
   const handleDelete = async (id) => {
     const confirm = window.confirm('¿Estás seguro de eliminar este hotel?');
     if (!confirm) return;
@@ -104,7 +100,7 @@ export const HotelForm = () => {
       const res = await deleteHotelHook(id);
       if (!res.error) {
         await getHotels();
-        if (id === editingId) resetForm(); // Cancelar edición si se elimina
+        if (id === editingId) resetForm();
       } else {
         console.error('Error al eliminar:', res);
       }
@@ -113,9 +109,14 @@ export const HotelForm = () => {
     }
   };
 
-  // Reiniciar formulario
   const resetForm = () => {
-    setForm({ name: '', address: '', category: '', amenities: '' });
+    setForm({
+      name: '',
+      address: '',
+      category: '',
+      description: '',
+      imageUrl: '',
+    });
     setEditingId(null);
     setErrors({});
   };
@@ -127,7 +128,6 @@ export const HotelForm = () => {
           Gestión de Hoteles
         </h1>
 
-        {/* Formulario */}
         <section aria-label={editingId ? "Formulario para editar hotel" : "Formulario para agregar hotel"} className="mb-12">
           <h2 className="text-3xl font-semibold text-gray-800 mb-5">{editingId ? 'Editar Hotel' : 'Agregar Nuevo Hotel'}</h2>
           <form
@@ -193,41 +193,62 @@ export const HotelForm = () => {
                 className={`peer h-12 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-teal-500 transition ${
                   errors.category ? 'border-red-500 focus:border-red-600' : ''
                 }`}
-                placeholder="Categoría"
+                placeholder="Categoría (Ej: THREE STARS)"
               />
               <label
                 htmlFor="category"
                 className="absolute left-0 -top-5 text-teal-600 text-sm font-semibold peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-5 peer-focus:text-teal-600 peer-focus:text-sm select-none transition-all"
               >
-                Categoría
+                Categoría (Ej: THREE STARS)
               </label>
               {errors.category && <p className="text-sm text-red-600 mt-1">{errors.category}</p>}
             </div>
 
-            {/* Campo Servicios */}
-            <div className="relative">
-              <input
-                type="text"
-                name="amenities"
-                value={form.amenities}
+            {/* Campo Descripción */}
+            <div className="relative md:col-span-2">
+              <textarea
+                name="description"
+                value={form.description}
                 onChange={handleChange}
-                id="amenities"
-                autoComplete="off"
-                className={`peer h-12 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-teal-500 transition ${
-                  errors.amenities ? 'border-red-500 focus:border-red-600' : ''
+                id="description"
+                rows={4}
+                className={`peer w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-teal-500 transition resize-none ${
+                  errors.description ? 'border-red-500 focus:border-red-600' : ''
                 }`}
-                placeholder="Servicios (separados por coma)"
+                placeholder="Descripción del hotel"
               />
               <label
-                htmlFor="amenities"
+                htmlFor="description"
                 className="absolute left-0 -top-5 text-teal-600 text-sm font-semibold peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-5 peer-focus:text-teal-600 peer-focus:text-sm select-none transition-all"
               >
-                Servicios (separados por coma)
+                Descripción del hotel
               </label>
-              {errors.amenities && <p className="text-sm text-red-600 mt-1">{errors.amenities}</p>}
+              {errors.description && <p className="text-sm text-red-600 mt-1">{errors.description}</p>}
             </div>
 
-            {/* Botones */}
+            {/* Campo URL Imagen */}
+            <div className="relative md:col-span-2">
+              <input
+                type="text"
+                name="imageUrl"
+                value={form.imageUrl}
+                onChange={handleChange}
+                id="imageUrl"
+                autoComplete="off"
+                className={`peer h-12 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-teal-500 transition ${
+                  errors.imageUrl ? 'border-red-500 focus:border-red-600' : ''
+                }`}
+                placeholder="URL de la imagen del hotel"
+              />
+              <label
+                htmlFor="imageUrl"
+                className="absolute left-0 -top-5 text-teal-600 text-sm font-semibold peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-5 peer-focus:text-teal-600 peer-focus:text-sm select-none transition-all"
+              >
+                URL de la imagen del hotel
+              </label>
+              {errors.imageUrl && <p className="text-sm text-red-600 mt-1">{errors.imageUrl}</p>}
+            </div>
+
             <div className="md:col-span-2 flex gap-6 justify-center mt-4">
               <button
                 type="submit"
@@ -253,7 +274,6 @@ export const HotelForm = () => {
           </form>
         </section>
 
-        {/* Tabla de hoteles */}
         <section aria-label="Lista de hoteles registrados" className="overflow-x-auto">
           <h2 className="text-3xl font-semibold text-gray-800 mb-5">Lista de Hoteles</h2>
           <table className="min-w-full rounded-xl overflow-hidden shadow-lg">
@@ -262,7 +282,8 @@ export const HotelForm = () => {
                 <th className="text-left px-6 py-3 font-semibold uppercase tracking-wider">Nombre</th>
                 <th className="text-left px-6 py-3 font-semibold uppercase tracking-wider">Dirección</th>
                 <th className="text-left px-6 py-3 font-semibold uppercase tracking-wider">Categoría</th>
-                <th className="text-left px-6 py-3 font-semibold uppercase tracking-wider">Servicios</th>
+                <th className="text-left px-6 py-3 font-semibold uppercase tracking-wider">Descripción</th>
+                <th className="text-left px-6 py-3 font-semibold uppercase tracking-wider">Imagen</th>
                 <th className="text-center px-6 py-3 font-semibold uppercase tracking-wider">Acciones</th>
               </tr>
             </thead>
@@ -273,8 +294,13 @@ export const HotelForm = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-gray-900 font-medium">{hotel.name}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-gray-700">{hotel.address}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-gray-700">{hotel.category}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-gray-700">
-                      {Array.isArray(hotel.amenities) ? hotel.amenities.join(', ') : hotel.amenities}
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-700">{hotel.description}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {hotel.imageUrl ? (
+                        <img src={hotel.imageUrl} alt={`Imagen de ${hotel.name}`} className="h-12 w-20 object-cover rounded" />
+                      ) : (
+                        <span className="text-gray-400 italic">Sin imagen</span>
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-center space-x-4">
                       <button
@@ -296,7 +322,7 @@ export const HotelForm = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="text-center py-8 text-gray-500 italic select-none">
+                  <td colSpan={6} className="text-center py-8 text-gray-500 italic select-none">
                     No hay hoteles registrados.
                   </td>
                 </tr>
@@ -308,4 +334,3 @@ export const HotelForm = () => {
     </div>
   );
 };
-
