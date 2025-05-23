@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getUserReservation } from '../../../services/api';
+import toast from 'react-hot-toast';
 
 export const getUserReservations = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -8,8 +9,9 @@ export const getUserReservations = () => {
 
     const getUserReservationsHook = async () => {
         setIsLoading(true)
-        const idUserLogged = localStorage.getItem("user")
-        const response = await getUserReservation(idUserLogged.uid)
+        const idUserLogged = JSON.parse(localStorage.getItem("user"))
+        const userId = idUserLogged?._id || idUserLogged?.uid || idUserLogged
+        const response = await getUserReservation(userId)
         setIsLoading(false)
 
         if (response.error) {

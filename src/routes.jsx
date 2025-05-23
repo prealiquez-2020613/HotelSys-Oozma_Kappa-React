@@ -4,6 +4,7 @@ import { HotelPage } from "./pages/hotel/HotelPage"
 import { HotelInfo } from "./components/hotel/HotelInfo"
 import { GestorPage } from "./pages/hotel/GestorPage"
 import { NotFoundPage } from "./pages/notfound/NotFoundPage"
+import { ReservationPage } from "./pages/reservation/ReservationPage"
 
 export const routes = [
     {path:'/',element:<HotelPage/>},

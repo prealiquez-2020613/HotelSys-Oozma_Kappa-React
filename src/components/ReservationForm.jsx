@@ -30,6 +30,7 @@ export const ReservationForm = () => {
     useEffect(() => {
         getHotels();
         getUserReservationsHook(); // Cargar reservaciones del usuario al montar el componente
+        console.log(reservations)
     }, []);
 
     const handleChange = (e) => {
@@ -152,8 +153,8 @@ export const ReservationForm = () => {
                     {reservations.length > 0 ? (
                         reservations.map((reservation) => (
                             <tr key={reservation._id}>
-                                <td className="border px-4 py-2">{reservation.hotel.name}</td>
-                                <td className="border px-4 py-2">{reservation.room.name}</td>
+                                <td className="border px-4 py-2">{reservation.hotel?.name || 'Sin hotel'}</td>
+                                <td className="border px-4 py-2">{reservation.room?.name || 'Sin habitación'}</td>
                                 <td className="border px-4 py-2">{new Date(reservation.checkIn).toLocaleDateString()}</td>
                                 <td className="border px-4 py-2">{new Date(reservation.checkOut).toLocaleDateString()}</td>
                                 <td className="border px-4 py-2">{reservation.status}</td>
