@@ -111,3 +111,14 @@ export const reservationRequest = async (user) => {
     return { error: true, err }
   }
 }
+
+//RUTA ROOMS
+
+//getByHotel
+export const getRoomsByHotel = async (idHotel) => {
+  try {
+    return await apiClient.get(`/v1/Room/getRoomsByHotel?idHotel=${idHotel}`)
+  } catch (err) {
+    return { error: true, err }
+  }
+}
