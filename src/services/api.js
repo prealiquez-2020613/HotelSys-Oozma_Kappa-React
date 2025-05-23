@@ -50,3 +50,16 @@ export const createHotel = async (hotel) => {
     return { error: true, err }
   }
 }
+
+//read
+export const getAllHotels = async () => {
+  try {
+    return await apiClient.get('/v1/hotel/getAllHotels', {
+      headers: {
+        skipAuth: true
+      }
+    })
+  } catch (err) {
+    return { error: true, err }
+  }
+}
