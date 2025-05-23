@@ -34,14 +34,20 @@ export const HotelForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
+    const validCategories = ['ONE STAR', 'TWO STARS', 'THREE STARS', 'FOUR STARS', 'FIVE STARS'];
+  
     if (!form.name.trim()) newErrors.name = 'El nombre es obligatorio';
     if (!form.address.trim()) newErrors.address = 'La dirección es obligatoria';
-    if (!form.category.trim()) newErrors.category = 'La categoría es obligatoria';
+    if (!form.category.trim()) {
+      newErrors.category = 'La categoría es obligatoria';
+    } else if (!validCategories.includes(form.category.trim().toUpperCase())) {
+      newErrors.category = 'Categoría inválida. Ej: THREE STARS';
+    }
     if (!form.description.trim()) newErrors.description = 'La descripción es obligatoria';
     if (!form.imageUrl.trim()) newErrors.imageUrl = 'La URL de la imagen es obligatoria';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  };  
 
   const handleSubmit = async () => {
     if (!validateForm()) {
