@@ -1,0 +1,2428 @@
+{
+	"info": {
+		"_postman_id": "b8b33d29-657a-4a1b-8a23-39af06dde59d",
+		"name": "HotelSystem - Oozma Kappa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37951884"
+	},
+	"item": [
+		{
+			"name": "Register & Loggin",
+			"item": [
+				{
+					"name": "userRegister",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Ben",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Reilly",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "breilly",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "breilly@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "uSer@1522",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userLogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable('token', data.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "prealiquez",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "uSer@1522",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hotel Functions",
+			"item": [
+				{
+					"name": "addHotel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Adriatika Hotel & Residence",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "4 Av. 20-44 Zona 14, Zona 14, 01014 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El Adriatika Hotel & Residence dispone de piscina al aire libre, solárium, jardín, conexión WiFi gratuita en todas las instalaciones y aparcamiento gratuito. La avenida de las Américas está a 200 metros.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/468184466.jpg?k=e1c9772f038de4f94082c7573123d49357c79bb7a7a4e2a572762f508a6e73e8&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "FIVE STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateHotel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Hotel Las Colinas",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/updateHotel/68166cf6e0cd075d56ef3bff",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"updateHotel",
+								"68166cf6e0cd075d56ef3bff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHotel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/deleteHotel/681688f30b43866746183742",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"deleteHotel",
+								"681688f30b43866746183742"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllHotels",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/getAllHotels",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"getAllHotels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findHotel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/getHotel/6812b66927b50540f58e1dd9",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"getHotel",
+								"6812b66927b50540f58e1dd9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Room Functions",
+			"item": [
+				{
+					"name": "addRoom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "Matrimonial",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "availability",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "hotel",
+									"value": "682d577c20dadb8c80ecdbca",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2500",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Suit Elegancia",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Room/createRoom",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Room",
+								"createRoom"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateRoom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "Familiar",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "availability",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "hotel",
+									"value": "68166cf6e0cd075d56ef3bff",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "3000",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Room/updateRoom/68168e286874218a9844e44a",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Room",
+								"updateRoom",
+								"68168e286874218a9844e44a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllRooms",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "Matrimonial",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "availability",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "hotel",
+									"value": "68166cf6e0cd075d56ef3bff",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2500",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Room/getAllRooms",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Room",
+								"getAllRooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findRoom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "Matrimonial",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "availability",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "hotel",
+									"value": "68166cf6e0cd075d56ef3bff",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2500",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Room/findRoom/68168df06874218a9844e446",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Room",
+								"findRoom",
+								"68168df06874218a9844e446"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRoom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "Matrimonial",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "availability",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "hotel",
+									"value": "68166cf6e0cd075d56ef3bff",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2500",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Room/deleteRoom/68168f406874218a9844e463",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Room",
+								"deleteRoom",
+								"68168f406874218a9844e463"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service Functions",
+			"item": [
+				{
+					"name": "addService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "hotel",
+									"value": "68166cf6e0cd075d56ef3bff",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Desayuno buffet",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "70",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Service/createService",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Service",
+								"createService"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "hotel",
+									"value": "68166cf6e0cd075d56ef3bff",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "Buffet Desayuno",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "70",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Service/updateService/6816a04d6d85bda576e54cc8",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Service",
+								"updateService",
+								"6816a04d6d85bda576e54cc8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Service/deleteService/6816a1e8ab1e583c6a0d4c18",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Service",
+								"deleteService",
+								"6816a1e8ab1e583c6a0d4c18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getServices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Service/getAllServices",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Service",
+								"getAllServices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Service/getService/6816a329ab1e583c6a0d4c29",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Service",
+								"getService",
+								"6816a329ab1e583c6a0d4c29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getServicesByHotel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/Service/getServicesByHotel/68166cf6e0cd075d56ef3bff",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"Service",
+								"getServicesByHotel",
+								"68166cf6e0cd075d56ef3bff"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservation Functions",
+			"item": [
+				{
+					"name": "addReservation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "hotel",
+									"value": "6816892a0b43866746183750",
+									"type": "text"
+								},
+								{
+									"key": "room",
+									"value": "68168e286874218a9844e44a",
+									"type": "text"
+								},
+								{
+									"key": "checkIn",
+									"value": "2025-05-18",
+									"type": "text"
+								},
+								{
+									"key": "checkOut",
+									"value": "2025-05-19",
+									"type": "text"
+								},
+								{
+									"key": "services",
+									"value": "6812b8a39cd7cc16f378cafa, 6812c07d17d2ebd33aff6322",
+									"type": "text"
+								},
+								{
+									"key": "nit",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/V1/Reservation/createReservation",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"V1",
+								"Reservation",
+								"createReservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserReservation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/V1/Reservation/getUserReservations",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"V1",
+								"Reservation",
+								"getUserReservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelReservation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reservationId",
+									"value": "6812c3a0d2782b3e8e625413",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/V1/Reservation/cancelReservation",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"V1",
+								"Reservation",
+								"cancelReservation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Receipt Functions",
+			"item": [
+				{
+					"name": "generateReceipt",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nit",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "reservationId",
+									"value": "6812c11b7ca505289cb9f833",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/V1/Receipt/generateReceipt",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"V1",
+								"Receipt",
+								"generateReceipt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReceiptStatus",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "receiptId",
+									"value": "681377211420a4eeaa4f4c74",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/V1/Receipt/updateReceiptStatus",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"V1",
+								"Receipt",
+								"updateReceiptStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReceiptByUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/V1/Receipt/getReceiptsByUser",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"V1",
+								"Receipt",
+								"getReceiptsByUser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event Functions",
+			"item": [
+				{
+					"name": "createEvent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "hotel",
+									"value": "6812b66927b50540f58e1dd9",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Boda de Patricio",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Boda de Patricio",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-02-03",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "WEDDING",
+									"type": "text"
+								},
+								{
+									"key": "services",
+									"value": "6812b8a39cd7cc16f378cafa, 6812c07d17d2ebd33aff6322",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/V1/event/createEvent",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"V1",
+								"event",
+								"createEvent"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hotels",
+			"item": [
+				{
+					"name": "hotel1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Adriatika Hotel & Residence",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "4 Av. 20-44 Zona 14, Zona 14, 01014 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El Adriatika Hotel & Residence dispone de piscina al aire libre, solárium, jardín, conexión WiFi gratuita en todas las instalaciones y aparcamiento gratuito. La avenida de las Américas está a 200 metros.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/468184466.jpg?k=e1c9772f038de4f94082c7573123d49357c79bb7a7a4e2a572762f508a6e73e8&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "FIVE STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hotel2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Best Western Plus Hotel Stofella",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "2 Avenida 12-28 Zona 10 , Zona 10, 10100 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El Best Western Plus Hotel Stofella se encuentra en Guatemala y ofrece un restaurante, WiFi gratuita, y habitaciones equipadas con aire acondicionado, TV y baño privado con ducha.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/592778947.jpg?k=f51dd436a10f49155de9f37ddf6a3402ef6e335c0853e2b56a1cea9fa9700d5e&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "FOUR STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hotel3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Barceló Guatemala City",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "7 avenida 15-45 zona 9, Zona 9, 01009 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El hotel alberga 25 salas de reuniones con capacidad para hasta 1.500 personas. La recepción 24 horas del hotel puede organizar servicios de traslado al aeropuerto, recorridos por la ciudad y alquiler de coches. Hay aparcamiento privado gratuito.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/103828980.jpg?k=fa3cd7e8cce130ccca549225b743a7ef12a808c1ea69d4b9be3e717c0e143793&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "FIVE STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hotel4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Hotel Biltmore",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "15 Calle 0-31 Zona 10, Zona 10, 01010 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El Biltmore está a 25 minutos en coche del parque Central y de la catedral de Guatemala. El hotel está cerca del distrito Zona Viva de Ciudad de Guatamala, donde se encuentran tiendas, restaurantes y bares.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/545386028.jpg?k=501eed26e94ce7d789f6030a4d8a56a3c9a0ecc31567ca2d1db2945a5282301e&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "THREE STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hotel5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Hotel Santander Plaza",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "15 Calle 3 -52 Zona 10, Zona 10, 00011 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El Hotel Santander Plaza se encuentra a 2 km del zoológico La Aurora y a 10 minutos en coche del Museo de Arte Moderno. Este establecimiento proporciona conexión Wi-Fi gratuita, alberga un pequeño gimnasio y sirve un desayuno gratuito.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/152311211.jpg?k=4ddf32f48fe3c0512d0caef92db7b59d2249004e86fcf5cbfca85c69cb4e2c1a&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "THREE STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hotel6",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Hilton Garden Inn Guatemala City",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "13 Calle 7-65 Zona 9 Zona hotelera, Zona 9, 01009 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El hotel Hilton Garden Inn Guatemala, situado en el distrito financiero y de negocios, ofrece alojamiento para viajeros de negocios y de ocio, WiFi gratuita, centro de fitness, tienda 24 horas y centro de negocios abierto las 24 horas.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/684676211.jpg?k=d6deeafee55ee385b17c4e7b2c9300d79d6f3ec62cdf18b0142c0685a1d56140&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "FOUR STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hotel7",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "The Westin Camino Real, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Avenida la Reforma y 14 Calle, Zona 10, Zona 10, 01010 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El The Westin Camino Real, Guatemala está situado a 2 km del aeropuerto de Guatemala y ofrece una piscina climatizada al aire libre y un centro de convenciones. Las habitaciones disponen de aire acondicionado, TV por cable y caja fuerte.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/509957921.jpg?k=cd6cb6f7a90d9241592d3c5cd5a31d1fd3a0c9ce3ff0087e78b1c4ae710eb7f7&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "FIVE STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hotel8",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Hotel San Carlos",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Ave Reforma 7-89 Z10, Zona 10, 01010 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "El Hotel San Carlos se encuentra a 5 minutos en coche del centro de la Ciudad de Guatemala, en la Avenida de la Reforma. Ofrece una piscina al aire libre y un restaurante. Dispone de habitaciones, suites y apartamentos bonitos con conexión Wi-Fi gratuita.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/280266564.jpg?k=62cfc711bba7ecdcf922efbc30b6b8d237fc1a3156cce35b6eb865fa11e54cf7&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "FOUR STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hotel9",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "L'Aurora Inn",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "15 calle \"A\" 7-52 zona 13 Aurora 1, Zona 13, 01013 Guatemala, Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "L'Aurora Inn es un alojamiento de 3 estrellas que se encuentra en Guatemala, a 5,5 km de Museo Popol Vuh, y que dispone de terraza. Se ofrece parking privado por un suplemento. El alojamiento ofrece recepción 24 horas, traslado para ir o volver del aeropuerto, servicio de habitaciones y wifi gratis en todo el alojamiento.",
+									"type": "text"
+								},
+								{
+									"key": "imageUrl",
+									"value": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/322195097.jpg?k=8ba4467cee07e487a1048e15a91abc8706152db6e921880cad6670dd155150ca&o=&hp=1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "TWO STARS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/hotel/createHotel",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"hotel",
+								"createHotel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3626/testing",
+					"host": [
+						"localhost"
+					],
+					"port": "3626",
+					"path": [
+						"testing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3626/v1/Room/getRoomsByHotel?idHotel=682d577c20dadb8c80ecdbca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3626",
+					"path": [
+						"v1",
+						"Room",
+						"getRoomsByHotel"
+					],
+					"query": [
+						{
+							"key": "idHotel",
+							"value": "682d577c20dadb8c80ecdbca"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
