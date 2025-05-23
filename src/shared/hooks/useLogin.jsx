@@ -27,7 +27,7 @@ export const useLogin = () => {
 
 
     if (token) {
-      navigate('/hotels')
+      navigate('/')
       return toast.success(message)
     }
     localStorage.setItem('token', response.data.token)
