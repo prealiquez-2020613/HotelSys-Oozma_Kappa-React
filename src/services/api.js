@@ -63,3 +63,12 @@ export const getAllHotels = async () => {
     return { error: true, err }
   }
 }
+
+//update
+export const updateHotel = async(id, hotelData)=>{
+  try {
+    return await apiClient.put(`/v1/hotel/updateHotel/${id}`, hotelData)
+  } catch (err) {
+    return {error: true, err}
+  }
+}
