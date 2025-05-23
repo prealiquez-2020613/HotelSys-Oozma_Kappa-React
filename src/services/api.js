@@ -7,6 +7,17 @@ const apiClient = axios.create(
   }
 )
 
+apiClient.interceptors.request.use(
+    (config)=>{
+        const token = localStorage.getItem('token')
+        if(token){
+            config.headers.Authorization = token
+        }
+        return config
+    }
+    
+)
+
 //RUTA REGISTER
 export const registerRequest = async(user)=>{
   try {

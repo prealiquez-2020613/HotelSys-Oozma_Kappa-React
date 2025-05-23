@@ -31,6 +31,8 @@ export const useLogin = () => {
         }
 
         toast.success('Login succesfully')
+        localStorage.setItem('token', response.data.token)
+
     }
 
   return {
