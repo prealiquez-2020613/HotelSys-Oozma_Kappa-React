@@ -41,3 +41,12 @@ export const findHotelRequest = async(hotelId)=>{
     return {error : true, err}
   }
 }
+
+//create
+export const createHotel = async (hotel) => {
+  try {
+    return await apiClient.post('/v1/hotel/createHotel', hotel)
+  } catch (err) {
+    return { error: true, err }
+  }
+}
