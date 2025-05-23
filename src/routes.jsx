@@ -11,5 +11,6 @@ export const routes = [
     {path:'/login',element:<LoginPage/>},
     {path:'/hotel/:hotelId', element:<HotelInfo/>},
     {path:'/hotels', element:<GestorPage/>},
+    {path:'/reservation', element:<ReservationPage/>},
     {path:'*', element:<NotFoundPage/>}
 ]
