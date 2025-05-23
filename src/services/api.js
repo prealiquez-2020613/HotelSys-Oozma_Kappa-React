@@ -121,6 +121,15 @@ export const getUserReservation = async () => {
   }
 }
 
+//cancelReservation
+export const cancelReservation = async (reservationId) => {
+  try {
+    return await apiClient.put('/V1/Reservation/cancelReservation', { reservationId })
+  } catch (err) {
+    return { error: true, err }
+  }
+}
+
 //RUTA ROOMS
 
 //getByHotel
